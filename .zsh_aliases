@@ -18,7 +18,9 @@ alias gs="git status"
 
 alias ipadress="curl ipaddr.site"
 alias ifconfig="ip -c -s -iec a"
-
+alias cr="cargo run"
+alias cb="cargo build"
+alias ct="cargo test"
 
 getcrypto() 
 {
@@ -39,4 +41,31 @@ getweather(){
     fi
 
 }
+
+# open github repo from git repo
+function hb() {
+  # from https://jasonmccreary.me/articles/open-github-command-line/
+  github_url=`git remote -v | awk '/fetch/{print $2}' | sed -Ee 's#(git@|git://)#https://#' -e 's@com:@com/@' -e 's%\.git$%%' | awk '/github/'`;
+  google-chrome -a $github_url
+}
+
+function parse_git_dirty() {
+  local STATUS=''
+  local FLAGS
+  FLAGS=('--porcelain')
+
+  if [[ "$(command git config --get customzsh.hide-dirty)" != "1" ]]; then
+    FLAGS+='--ignore-submodules=dirty'
+    STATUS=$(command git status ${FLAGS} 2> /dev/null | tail -n1)
+  fi
+
+  if [[ -n $STATUS ]]; then
+    echo "$ZSH_THEME_GIT_PROMPT_DIRTY"
+  else
+    echo "$ZSH_THEME_GIT_PROMPT_CLEAN"
+  fi
+}
+
+
+
 
