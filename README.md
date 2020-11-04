@@ -1,6 +1,6 @@
-## My Aliases List 4 Personal Usage 
+## My Aliases & Configurations
 
-Just clone your home folder and make sure you've installed zsh and curl 
+Just clone to your home directory
 
 
 ![screenshot](https://raw.githubusercontent.com/caglardursun/bash-stuff/master/images/crypto1.png)
